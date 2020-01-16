@@ -14,7 +14,7 @@
 # `n` and `m` can range anywhere between 1 and 1000.
 
 
-import time, sys
+import sys
 
 # Python recursion depth limit is usually 1000,
 # which presents an issue for a recursive solution to this problem.
@@ -23,11 +23,14 @@ sys.setrecursionlimit(1010)
 
 
 BRICK_LENGTHS = (1,2,3,4)
+
+# dictionaries for memoization
 row_perms = {0: 1}
 wall_perms = {}
 valid_wall_perms = {1: 1}
 
 
+# count all possible rows of a given width
 def count_rows(remaining_width):
     stored = row_perms.get(remaining_width)
     if stored:
@@ -40,6 +43,8 @@ def count_rows(remaining_width):
     return row_perms[remaining_width]
 
 
+# return the total number of possible walls of a given height and width
+# including invalid ones
 def all_walls(height, width):
     stored = wall_perms.get(width)
     if stored:
@@ -48,6 +53,7 @@ def all_walls(height, width):
     return wall_perms[width]
 
 
+# return total number of valid walls of a given height and width
 def count_walls(height, width):
     stored = valid_wall_perms.get(width)
     if stored:
